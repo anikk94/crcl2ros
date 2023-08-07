@@ -2,7 +2,11 @@
 <launch>
    <arg name="world_name" default="$(find fanuc_lrmate200id_support)/world/aprs-fanuc.world" />
    <arg name="gzmodels" default="$(find gzdatabase)/models" />
-<!--  <arg name="gzmodels" default="/home/nala/ros/crcl2ros/src/gzdatabase/models" />-->
+   <!-- <arg name="gzmodels" default="/home/nala/ros/crcl2ros/src/gzdatabase/models" /> -->
+
+   <!-- <env name="GAZEBO_MODEL_PATH" value="/home/ani/crcl2ros/src/gzdatabase/models"/> -->
+   <!-- <env name="GAZEBO_MODEL_PATH" value="$(find gzdatabase)/models"/> -->
+   <env name="GAZEBO_MODEL_PATH" value="$(arg gzmodels):$(optenv GAZEBO_MODEL_PATH)"/>
 
    <arg name="debug" default="false" />
    <arg name="extra_gazebo_args" default="" />
@@ -34,7 +38,9 @@
    <node name="gazebo" pkg="gazebo_ros" type="$(arg script_type)" respawn="$(arg respawn_gazebo)" output="screen" 
       args="$(arg command_arg1) $(arg command_arg2) $(arg command_arg3) -e $(arg physics) $(arg extra_gazebo_args) $(arg world_name)">
 
-<env name="GAZEBO_MODEL_PATH" value="$(arg gzmodels):$(optenv GAZEBO_MODEL_PATH)" /> 
+      <!-- <env name="GAZEBO_MODEL_PATH" value="$(arg gzmodels):$(optenv GAZEBO_MODEL_PATH)" />  -->
+      <!-- <env name="GAZEBO_MODEL_PATH" value="$(arg gzmodels)" />  -->
+      <!-- <env name="GAZEBO_MODEL_PATH" value="/home/ani/crcl2ros/src/gzdatabase/models/" />  -->
    </node>
    <!-- start gazebo client -->
    <group if="$(arg gui)">

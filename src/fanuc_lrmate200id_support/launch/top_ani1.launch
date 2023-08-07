@@ -23,6 +23,8 @@
     <include file="$(find fanuc_lrmate200id_support)/launch/gz.launch">
         <arg name="world_name" value="$(find fanuc_lrmate200id_support)/world/aprs-fanuc.world" />
         <arg name="gzmodels" default="$(find gzdatabase)/models" />
+        <arg name="paused" value="true"/>
+        <arg name="recording" value="true"/>
     </include> 
 
 </launch>
