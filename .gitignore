@@ -9,6 +9,5 @@ install
 Todo.txt
 debug
 *.so*
-
-
-
+.vscode
+.gitignore
