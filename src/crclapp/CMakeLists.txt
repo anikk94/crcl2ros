@@ -181,6 +181,7 @@ add_executable(${PROJECT_NAME}
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+message("Message #0")
 
 
 set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
@@ -209,15 +210,23 @@ set(CMAKE_CXX_FLAGS "-Wno-format-security ${CMAKE_CXX_FLAGS}")
 set(CMAKE_CXX_FLAGS "-w ${CMAKE_CXX_FLAGS}")
 
 
-
+message("Message #2")
+message("xerces-c location lookup start")
+# get_property(loc TARGET xerces-c PROPERTY IMPORTED)
+# message(STATUS "${loc}")
+message("xerces-c location lookup end")
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}
-  ${catkin_LIBRARIES}
-  xerces-c
-  readline
+${catkin_LIBRARIES}
+xerces-c
+readline
 )
 
+
+message("Message #3")
+get_target_property(OUT ${PROJECT_NAME} LINK_LIBRARIES)
+message(STATUS ${OUT})
 
 
 #############
@@ -249,7 +258,7 @@ set(CONFIG_SOURCES
   ${CMAKE_CURRENT_SOURCE_DIR}/config/FanucLRMate200iD.ini
   ${CMAKE_CURRENT_SOURCE_DIR}/config/motoman_sia20d.ini
   )    
-  
+
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_BIN_DESTINATION}/config/
